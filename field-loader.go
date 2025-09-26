@@ -93,6 +93,9 @@ func ObjToFields(obj interface{}) (*ObjMeta, []Field, error) {
 		if TagValue(tag, "grid_sortable", "0") == "1" {
 			gs.SortableFields = append(gs.SortableFields, alias)
 		}
+		if TagValue(tag, "grid_searchable", "0") == "1" {
+			gs.SearchableFields = append(gs.SearchableFields, alias)
+		}
 
 		//-- main obj
 		SetIfStruct(meta, "GoCustomValidator", meta.GoCustomValidator == "", TagValue(tag, "obj_go_validator", GoCustomValidator))

@@ -21,9 +21,10 @@ type GridField struct {
 }
 
 type GridSetting struct {
-	IDField        string   `json:"idField"`
-	KeywordFields  []string `json:"keywordFields"`
-	SortableFields []string `json:"sortable"`
+	IDField          string   `json:"idField"`
+	KeywordFields    []string `json:"keywordFields"`
+	SortableFields   []string `json:"sortable"`
+	SearchableFields []string `json:"searchable"`
 }
 
 type GridConfig struct {
