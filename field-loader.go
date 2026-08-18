@@ -102,10 +102,18 @@ func ObjToFields(obj interface{}) (*ObjMeta, []Field, error) {
 	}
 
 	if len(gs.KeywordFields) == 0 {
-		gs.KeywordFields = []string{"_id", "Name"}
+		if gs.IDField != "" {
+			gs.KeywordFields = append(gs.KeywordFields, gs.IDField)
+		}
+		for _, f := range fields {
+			if f.Field == "Name" {
+				gs.KeywordFields = append(gs.KeywordFields, f.Form.Field)
+				break
+			}
+		}
 	}
-	if len(gs.SortableFields) == 0 {
-		gs.SortableFields = []string{"_id"}
+	if len(gs.SortableFields) == 0 && gs.IDField != "" {
+		gs.SortableFields = []string{gs.IDField}
 	}
 	meta.Grid = gs
 	meta.Form = fs

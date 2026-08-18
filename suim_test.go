@@ -89,6 +89,21 @@ func TestSuimGrid(t *testing.T) {
 	})
 }
 
+func TestSuimGridCustomKey(t *testing.T) {
+	convey.Convey("Grid with custom primary key", t, func() {
+		cfg, e := suim.CreateGridConfig(new(ProductModel))
+		convey.So(e, convey.ShouldBeNil)
+		convey.So(cfg.Setting.IDField, convey.ShouldEqual, "code")
+		convey.So(cfg.Setting.SortableFields, convey.ShouldResemble, []string{"code"})
+		convey.So(cfg.Setting.KeywordFields, convey.ShouldResemble, []string{"code", "name"})
+	})
+}
+
+type ProductModel struct {
+	Code string `json:"code" key:"1" grid:"include"`
+	Name string `json:"name" grid:"include"`
+}
+
 func TestValidate(t *testing.T) {
 	joinDate := time.Date(2023, 01, 01, 0, 0, 0, 0, time.UTC)
 	convey.Convey("valid data", t, func() {
