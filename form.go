@@ -54,6 +54,7 @@ type FormField struct {
 	DateFormat string `json:"dateFormat"`
 	Unit       string `json:"unit"`
 	Width      string `json:"width"`
+	ColSpan    int    `json:"colSpan"`
 
 	SpaceBefore int `json:"spaceBefore"`
 	SpaceAfter  int `json:"spaceAfter"`

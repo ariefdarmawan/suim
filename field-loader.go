@@ -242,6 +242,7 @@ func toField(rt reflect.StructField) (Field, error) {
 	form.ShowHint = TagExist(tag, "form_hide_hint")
 	form.ShowTitle = TagExist(tag, "form_hide_title")
 	form.Width = TagValue(tag, "form_width", "")
+	form.ColSpan = DefInt(TagValue(tag, "form_col_span", "0"), 0)
 	form.SpaceBefore = DefInt(TagValue(tag, "form_space_before", "0"), 0)
 	form.SpaceAfter = DefInt(TagValue(tag, "form_space_after", "0"), 0)
 	f.Form = form
