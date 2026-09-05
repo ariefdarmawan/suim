@@ -229,6 +229,12 @@ func toField(rt reflect.StructField) (Field, error) {
 			form.LookupSearchs = form.LookupLabels
 		}
 	}
+	form.FormInsertConfig = TagValue(tag, "form_insert_config", "")
+	form.FormInsertSize = DefInt(TagValue(tag, "form_insert_size", "240"), 240)
+	if form.FormInsertSize <= 0 {
+		form.FormInsertSize = 240
+	}
+	form.FormInsertAPI = TagValue(tag, "form_insert_api", "")
 	form.Placeholder = TagValue(tag, "form_placeholder", form.Label)
 	lengths := strings.Split(TagValue(tag, "form_length", "0,999"), ",")
 	form.MinLength = DefInt(DefSliceItem(lengths, 0, "0"), 0)

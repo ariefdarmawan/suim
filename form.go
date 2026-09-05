@@ -34,6 +34,12 @@ type FormField struct {
 	LookupFormat1 string   `json:"lookupFormat1"`
 	LookupFormat2 string   `json:"lookupFormat2"`
 
+	// FormInsertConfig and FormInsertAPI enable creating a lookup record from
+	// the form that owns this field. They are only actionable for lookup fields.
+	FormInsertConfig string `json:"formInsertConfig"`
+	FormInsertSize   int    `json:"formInsertSize"`
+	FormInsertAPI    string `json:"formInsertApi"`
+
 	ShowTitle  bool `json:"showTitle"`
 	ShowHint   bool `json:"showHint"`
 	ShowDetail bool `json:"showDetail"`
