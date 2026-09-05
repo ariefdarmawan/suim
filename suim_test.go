@@ -19,7 +19,9 @@ func TestLabel(t *testing.T) {
 		"FamilyName":   {Kind: "u", Result: "FAMILY NAME"},
 		"First_Name":   {Kind: "l", Result: "First name"},
 		"RememberMe":   {Kind: "", Result: "Remember Me"},
-		"EmailID":      {Kind: "", Result: "Email ID"},
+		"EmailID":      {Kind: "", Result: "Email"},
+		"ClientID":     {Kind: "", Result: "Client"},
+		"SalesID":      {Kind: "", Result: "Sales"},
 		"_id":          {Kind: "", Result: "_id"},
 		"ID":           {Kind: "", Result: "ID"},
 	}

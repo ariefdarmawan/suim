@@ -10,6 +10,14 @@ func Label(name, kind string) string {
 	if name == "ID" || name == "_id" {
 		return name
 	}
+	// ID is an implementation suffix for reference fields (for example
+	// ClientID). It should not be exposed in the default human-facing label.
+	if strings.HasSuffix(name, "ID") {
+		withoutID := strings.TrimSuffix(strings.TrimSuffix(name, "ID"), "_")
+		if withoutID != "" {
+			name = withoutID
+		}
+	}
 	IDs := strings.Split(name, "ID")
 	words := []string{}
 	for idIndex, idText := range IDs {
