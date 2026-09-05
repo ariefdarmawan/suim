@@ -9,6 +9,7 @@ type formColSpanFixture struct {
 type formInsertFixture struct {
 	CustomerID string `form_lookup:"/customer/find|_id|Name" form_insert_config:"/customer/formconfig" form_insert_size:"480" form_insert_api:"/customer/insert"`
 	NoSizeID   string `form_lookup:"/customer/find|_id|Name" form_insert_config:"/customer/formconfig" form_insert_api:"/customer/insert"`
+	WideID     string `form_lookup:"/customer/find|_id|Name" form_insert_config:"/customer/formconfig" form_insert_size:"80%" form_insert_api:"/customer/insert"`
 }
 
 func TestFormColSpanTag(t *testing.T) {
@@ -34,10 +35,13 @@ func TestFormInsertTags(t *testing.T) {
 	if insert.FormInsertAPI != "/customer/insert" {
 		t.Fatalf("expected form insert API, got %q", insert.FormInsertAPI)
 	}
-	if insert.FormInsertSize != 480 {
-		t.Fatalf("expected form insert size 480, got %d", insert.FormInsertSize)
+	if insert.FormInsertSize != "480" {
+		t.Fatalf("expected form insert size 480, got %q", insert.FormInsertSize)
 	}
-	if fields[1].Form.FormInsertSize != 240 {
-		t.Fatalf("expected default form insert size 240, got %d", fields[1].Form.FormInsertSize)
+	if fields[1].Form.FormInsertSize != "240" {
+		t.Fatalf("expected default form insert size 240, got %q", fields[1].Form.FormInsertSize)
+	}
+	if fields[2].Form.FormInsertSize != "80%" {
+		t.Fatalf("expected CSS form insert size 80%%, got %q", fields[2].Form.FormInsertSize)
 	}
 }

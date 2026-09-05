@@ -230,9 +230,9 @@ func toField(rt reflect.StructField) (Field, error) {
 		}
 	}
 	form.FormInsertConfig = TagValue(tag, "form_insert_config", "")
-	form.FormInsertSize = DefInt(TagValue(tag, "form_insert_size", "240"), 240)
-	if form.FormInsertSize <= 0 {
-		form.FormInsertSize = 240
+	form.FormInsertSize = strings.TrimSpace(TagValue(tag, "form_insert_size", "240"))
+	if form.FormInsertSize == "" {
+		form.FormInsertSize = "240"
 	}
 	form.FormInsertAPI = TagValue(tag, "form_insert_api", "")
 	form.Placeholder = TagValue(tag, "form_placeholder", form.Label)
