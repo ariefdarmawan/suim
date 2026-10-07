@@ -117,10 +117,25 @@ func ArrangeFormConfigFields(cfg *FormConfig, formFields ...FormField) (*FormCon
 				colIndex := 0
 				for idx, f := range sectionFields {
 					if f.Row == 0 {
+						// Match the frontend: ColSpan takes precedence over the
+						// legacy numeric Width when consuming grid columns.
+						columnSpan := f.ColSpan
+						if columnSpan <= 0 {
+							columnSpan = DefInt(f.Width, 1)
+						}
+						if columnSpan < 1 {
+							columnSpan = 1
+						}
+						if columnSpan > section.AutoCol {
+							columnSpan = section.AutoCol
+						}
+						if colIndex > 0 && colIndex+columnSpan > section.AutoCol {
+							colIndex = 0
+							rowIndex++
+						}
 						f.Row = rowIndex
 						f.Col = colIndex + 1
-						widthIncrease := DefInt(f.Width, 1)
-						colIndex += widthIncrease
+						colIndex += columnSpan
 						if colIndex >= section.AutoCol {
 							colIndex = 0
 							rowIndex++
